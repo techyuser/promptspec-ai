@@ -30,12 +30,15 @@ import {
 } from "@/types/promptspec";
 
 const INITIAL_SCENARIO = JUDGE_SCENARIOS[0];
-const INITIAL_RESULT: CompileResult = compilePromptDeterministic({
-  prompt: INITIAL_SCENARIO.prompt,
-  domain: INITIAL_SCENARIO.domain,
-  outputMode: INITIAL_SCENARIO.outputMode,
-  guardrails: INITIAL_SCENARIO.guardrails,
-});
+const INITIAL_RESULT: CompileResult = {
+  ...compilePromptDeterministic({
+    prompt: INITIAL_SCENARIO.prompt,
+    domain: INITIAL_SCENARIO.domain,
+    outputMode: INITIAL_SCENARIO.outputMode,
+    guardrails: INITIAL_SCENARIO.guardrails,
+  }),
+  latencyMs: 240,
+};
 
 export default function PromptSpecStudio() {
   const [activeScenarioId, setActiveScenarioId] = useState<string>(INITIAL_SCENARIO.id);
